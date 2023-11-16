@@ -97,13 +97,4 @@ public class Category {
     this.lowestRatedApp = nameOfLowest;
     this.lowestRatedAppRating = ratingOfLowest;
   }
-  // private Float getAverage() {
-  //   Float avg = (float) 0;
-  //   for (Entry<String, Float> app : mapOfApps.entrySet()) {
-  //     avg += app.getValue();
-  //   }
-  //   avg /= mapOfApps.size();
-  //   System.out.println(avg);
-  //   return avg;
-  // }
 }
