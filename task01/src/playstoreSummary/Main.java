@@ -9,7 +9,7 @@ import java.util.Map.Entry;
 public class Main {
 
   public static void main(String args[]) throws Exception {
-    if (args.length < 0) {
+    if (args.length <= 0) {
       System.out.println("ERROR: Please provide a googleplaystore.csv");
       System.exit(1);
     }
