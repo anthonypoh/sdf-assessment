@@ -13,11 +13,11 @@ import java.util.List;
 
 public class Client implements AutoCloseable {
 
-  InputStreamReader isr;
-  BufferedReader br;
-  OutputStreamWriter osw;
-  BufferedWriter bw;
-  Socket sock;
+  final InputStreamReader isr;
+  final BufferedReader br;
+  final OutputStreamWriter osw;
+  final BufferedWriter bw;
+  final Socket sock;
 
   private List<Product> products = new ArrayList<>();
   private List<Product> selected = new ArrayList<>();
@@ -52,14 +52,18 @@ public class Client implements AutoCloseable {
     Float rating = (float) 0;
 
     while (null != (line = br.readLine())) {
+      if (line.length() <= 0) {
+        continue;
+      }
       if (line.contains(":")) {
         String[] splitLine = line.trim().split(":");
-        directive = splitLine[0];
+        directive = splitLine[0].trim();
         value = splitLine[1].trim();
       } else {
         directive = line;
         value = "";
       }
+
       switch (directive) {
         case "request_id":
           this.requestId = value;
@@ -123,15 +127,17 @@ public class Client implements AutoCloseable {
       if (product.getPrice() > tempBudget) {
         continue;
       }
+
       if (prev != null) {
-        if (product.getRating() == prev.getRating()) {
-          if (product.getPrice() > prev.getPrice()) {
-            selected.removeLast();
-            tempBudget += prev.getPrice();
-            selected.add(product);
-            tempBudget -= product.getPrice();
-            continue;
-          }
+        if (
+          product.getRating() == prev.getRating() &&
+          product.getPrice() > prev.getPrice()
+        ) {
+          selected.removeLast();
+          tempBudget += prev.getPrice();
+          selected.add(product);
+          tempBudget -= product.getPrice();
+          continue;
         }
       }
 

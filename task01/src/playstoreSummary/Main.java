@@ -37,12 +37,10 @@ public class Main {
 
         if (rating.isNaN()) {
           cur.addDiscarded();
-          // System.out.printf("App: %s rating is not a number.\n", app);
           continue;
         }
 
         cur.addApp(app, rating);
-        // System.out.printf("%s, %s, %s\n", app, category, rating);
       }
 
       for (Entry<String, Category> cat : categories.entrySet()) {
@@ -55,7 +53,7 @@ public class Main {
           System.out.printf("\tDiscarded: %d\n", curCat.getDiscarded());
           continue;
         }
-
+        
         System.out.printf("\tHighest: %s, (%.1f)\n",
           curCat.getHighestRatedApp(),
           curCat.getHighestRatedAppRating()
@@ -68,7 +66,6 @@ public class Main {
         System.out.printf("\tCount: %d\n", curCat.getTotalApps());
         System.out.printf("\tDiscarded: %d\n", curCat.getDiscarded());
       }
-
       System.out.printf("\nTotal lines in file: %d\n", linesRead);
     }
   }
